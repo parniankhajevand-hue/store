@@ -1,155 +1,236 @@
-import React, { useEffect, useState } from "react";
-import useCartStore from "./store/cartStore";
-import { Link } from "react-router-dom";
+/*{/*import React, { useState } from "react"; // ← این را اضافه کن
+import { Routes, Route } from "react-router-dom"; // ← برای استفاده از <Routes> و <Route>
 
+import HomePage from "./HomePage.jsx"; // ← اگر صفحه اصلی داری، حتماً ایمپورتش کن
+import ProductPage from "./ProductPage.jsx";
+import CartPage from "./CartPage.jsx";
+import CartButton from "./CartButton.jsx";
+import useCartStore from "./store/cartStore.js";
+import AdminPage from "./Admin/adminPage.jsx";
+import AdminLogin from "./Admin/adminLogin.jsx";
 
-const API = "https://fakestoreapi.com/products";
+import "./index.css";
 
 export default function App() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [search, setSearch] = useState("");
-
   const cart = useCartStore((state) => state.cart);
-  const addToCart = useCartStore((state) => state.addToCart);
-  const removeFromCart = useCartStore((state) => state.removeFromCart);
-  const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const clearCart = useCartStore((state) => state.clearCart);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(API)
-      .then((res) => {
-        if (!res.ok) throw new Error("خطا در دریافت محصولات");
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setError(e.message);
-        setLoading(false);
-      });
-  }, []);
-
-  const filteredProducts = products.filter((p) =>
-    p.title.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const [isAdmin, setIsAdmin] = useState(false); // وضعیت لاگین ادمین
 
   return (
     <div style={{ padding: 20, fontFamily: "Arial, sans-serif" }}>
-      <h1>فروشگاه</h1>
+      <h1>🛍 فروشگاه</h1>
 
-      <input
-        type="text"
-        placeholder="جستجو"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{ padding: 8, width: 250, marginBottom: 20 }}
-      />
+      {/* دکمه سبد خرید {*/
+     /* <div style={{ marginBottom: 20 }}>
+        <CartButton cart={cart} />
+      </div>
+*/
+    /* مسیرهای صفحات {*/
+      /*<Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/cart" element={<CartPage />} />
 
-      {loading && <p>در حال بارگذاری...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* مسیر ورود به پنل ادمین }*/
+       /* <Route
+          path="/admin"
+          element={
+            isAdmin ? (
+              <AdminPage />
+            ) : (
+              <AdminLogin setIsAdmin={setIsAdmin} /> // ← اینجا پراپ اضافه شد
+            )
+          }
+        />
+      </Routes>
+    </div>
+  );
+}*/
+// App.jsx
+/*import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-      <div style={{ display: "flex", gap: 20 }}>
-        {/* محصولات */}
-        <div style={{ flex: 1 }}>
-          <h2>محصولات</h2>
-          {filteredProducts.length === 0 && <p>محصولی یافت نشد</p>}
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            {filteredProducts.map((p) => (
-              <li
-                key={p.id}
-                style={{
-                  display: "flex",
-                  gap: 10,
-                  borderBottom: "1px solid #ccc",
-                  padding: 10,
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  style={{ width: 60, height: 60, objectFit: "contain" }}
-                />
-                <div style={{ flex: 1 }}>
-                  {/*<h4 style={{ margin: 0 }}>{p.title}</h4>*/}
-                  <h4 style={{ margin: 0 }}>
-  <Link to={`/product/${p.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-    {p.title}
-  </Link>
-</h4>
+// صفحات اصلی
+import HomePage from "./HomePage";
+import ProductPage from "./ProductPage";
+import CartPage from "./CartPage.jsx";
 
-                  <p style={{ margin: 0, color: "#555" }}>{p.category}</p>
-                </div>
-                <div style={{ width: 70, textAlign: "right" }}>{p.price} $</div>
-                <button onClick={() => addToCart(p)}>افزودن</button>
-              </li>
-            ))}
-          </ul>
+// کامپوننت‌ها و استورها
+import CartButton from "./CartButton.jsx";
+import CartStore from "./store/CartStore.js";
+
+// صفحات ادمین
+import AdminPage from "./Admin/AdminPage.jsx";
+import AdminLogin from "./Admin/AdminLogin.jsx";
+
+// استایل‌ها
+import "./index.css";
+
+export default function App() {
+  // وضعیت ورود ادمین
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  return (
+  <Router>
+    <div>
+      <CartButton />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductPage />} />*/
+
+        /* مسیر محصول تکی */
+        /*<Route path="/product/:id" element={<ProductPage />} />
+
+        <Route path="/cart" element={<CartPage />} />
+
+        {!isAdmin && (
+          <Route
+            path="/admin-login"
+            element={<AdminLogin setIsAdmin={setIsAdmin} />}
+          />
+        )}
+        {isAdmin && <Route path="/admin" element={<AdminPage />} />}
+      </Routes>
+    </div>
+  </Router>
+);*/
+/*import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
+import HomePage from "./HomePage.jsx";
+import ProductPage from "./ProductPage.jsx";
+//import CartPage from "./CartPage.jsx";
+import CartButton from "./CartButton.jsx";
+//import AdminLogin from "./Admin/AdminLogin.jsx";
+//import AdminPage from "./Admin/AdminPage.jsx";
+//import useCartStore from "./store/cartStore.js";
+
+function App() {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const cart = useCartStore((state) => state.cart);
+
+  return (
+    <Router>
+      <div style={{ padding: 20, fontFamily: "Arial, sans-serif" }}>
+        <h1>🛍 فروشگاه</h1>
+
+        <div style={{ marginBottom: 20 }}>
+          <CartButton cart={cart} />
         </div>
 
-        {/* سبد خرید */}
-        <div style={{ width: 350, border: "1px solid #ddd", padding: 15 }}>
-          <h2>سبد خرید({cart.length})</h2>
-          {cart.length === 0 ? (
-            <p>سبد خرید خالی است</p>
-          ) : (
-            <>
-              {cart.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: 10,
-                    borderBottom: "1px dashed #ccc",
-                    paddingBottom: 8,
-                  }}
-                >
-                  <div style={{ flex: 1 }}>
-                    <strong>{item.title}</strong> <br />
-                    <small>
-                      قیمت: {item.price} $ — تعداد:{" "}
-                      <input
-                        type="number"
-                        value={item.qty}
-                        min={1}
-                        onChange={(e) =>
-                          updateQuantity(item.id, parseInt(e.target.value) || 1)
-                        }
-                        style={{ width: 50 }}
-                      />
-                    </small>
-                  </div>
-                  <button onClick={() => removeFromCart(item.id)}>حذف</button>
-                </div>
-              ))}
-              <div style={{ marginTop: 15, fontWeight: "bold" }}>
-                 مجموع قیمت: {totalPrice.toFixed(2)} 
-              </div>
-              <button
-                style={{ marginTop: 10 }}
-                onClick={() => {
-                  if (window.confirm("آیا میخوای سبد خرید خالی شود؟")) {
-                    clearCart();
-                  }
-                }}
-              >
-               خالی کردن سبد خرید
-              </button>
-            </>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+
+          {!isAdmin && (
+            <Route
+              path="/admin-login"
+              element={<AdminLogin setIsAdmin={setIsAdmin} />}
+            />
           )}
+          {isAdmin && <Route path="/admin" element={<AdminPage />} />}
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;*/
+
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import useCartStore from "./store/CartStore.js";
+import "./index.css";
+import "./app.css";
+
+
+export default function App() {
+  const { id } = useParams();
+  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [qty, setQty] = useState(1);
+
+  const addToCart = useCartStore((state) => state.addToCart);
+
+  useEffect(() => {
+    setLoading(true);
+    if (id) {
+      fetch(`https://fakestoreapi.com/products/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProduct(data);
+          setLoading(false);
+        })
+        .catch(() => {
+          setProduct(null);
+          setLoading(false);
+        });
+    } else {
+      fetch("https://fakestoreapi.com/products")
+        .then((res) => res.json())
+        .then((data) => {
+          setProducts(data);
+          setLoading(false);
+        })
+        .catch(() => {
+          setProducts([]);
+          setLoading(false);
+        });
+    }
+  }, [id]);
+
+  if (loading) return <p className="center">در حال بارگذاری...</p>;
+
+  if (id) {
+    if (!product) return <p className="center error">محصول پیدا نشد</p>;
+
+    return (
+      <div className="main">
+        <Link to="/products">⬅ بازگشت به محصولات</Link>
+
+        <h2>{product.title}</h2>
+        <img
+          src={product.image}
+          alt={product.title}
+          className="card-img"
+          style={{ height: 200, objectFit: "contain" }}
+        />
+        <p>{product.description}</p>
+        <p className="card-price">💵 قیمت: {product.price} $</p>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 10 }}>
+          <button onClick={() => setQty(qty > 1 ? qty - 1 : 1)}>-</button>
+          <span>{qty}</span>
+          <button onClick={() => setQty(qty + 1)}>+</button>
         </div>
+
+        <button className="addButton" onClick={() => addToCart(product, qty)}>
+          افزودن {qty} عدد به سبد خرید
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="main">
+      <h2>لیست محصولات</h2>
+      <div className="grid">
+        {products.map((p) => (
+          <Link key={p.id} to={`/product/${p.id}`} style={{ textDecoration: "none" }}>
+            <div className="card">
+              <img src={p.image} alt={p.title} className="card-img" />
+              <div className="card-body">
+                <h3 className="card-title">{p.title}</h3>
+                <p className="card-category">{p.category}</p>
+                <p className="card-price">{p.price} $</p>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
 }
-
-
