@@ -147,7 +147,7 @@ export default function HomePage() {
       >
         {products.map((product) => (
           <div key={product.id} className="card">
-            {/* لینک به صفحه محصول */}
+            
             <Link to={/product/${product.id}} style={{ textDecoration: "none" }}>
               <img
                 src={product.image}
@@ -161,7 +161,7 @@ export default function HomePage() {
               </div>
             </Link>
 
-            {/* دکمه اضافه کردن به سبد خرید */}
+            
             <button
               onClick={() => addToCart(product, 1)}
               style={{
@@ -180,4 +180,5 @@ export default function HomePage() {
       </div>
     </div>
   );
+
 }
