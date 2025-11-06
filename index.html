@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه سبز</title>
+    <title>من شرکا</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@
             background-color: #388e3c;
         }
 
-        /* دکمه سبد خرید */
+        /* دکمه */
         #cart-button {
             position: fixed;
             top: 1rem;
@@ -64,11 +64,11 @@
             z-index: 1000;
         }
 
-        /* سبد خرید کشویی */
+        
         #cart {
             position: fixed;
             top: 0;
-            right: -320px; /* مخفی کردن به طور پیش‌فرض */
+            right: -320px; 
             width: 300px;
             height: 100%;
             background-color: #a5d6a7;
@@ -78,7 +78,7 @@
             z-index: 999;
         }
         #cart.show {
-            right: 0; /* وقتی باز است */
+            right: 0; 
         }
         .cart-item {
             display: flex;
@@ -95,7 +95,7 @@
 </head>
 <body>
     <header>
-        <h1>فروشگاه سبز</h1>
+        <h1>فروشگاه من و شرکا</h1>
     </header>
 
     <div class="products" id="products"></div>
@@ -127,7 +127,7 @@
                         <img src="${product.image}" alt="${product.title}">
                         <h4>${product.title}</h4>
                         <p>$${product.price}</p>
-                        <button onclick="addToCart(${product.id}, '${product.title}', ${product.price})">افزودن به سبد</button>
+                        <button onclick="addToCart(${product.id}, '${product.title}', ${product.price})">بیا این طرف بازار</button>
                     `;
                     productsContainer.appendChild(productEl);
                 });
